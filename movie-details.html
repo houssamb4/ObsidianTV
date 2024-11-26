@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./assets/images/icon.png" type="image/png">
+  <title>Top Gun: Maverick - ObsidianTV</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+  <link rel="stylesheet" href="./assets/css/enhancements.css">
+  <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
+  <style>
+    .movie-hero {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      margin-bottom: 60px;
+      overflow: hidden;
+    }
+
+    .movie-hero-bg {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .movie-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.3) 0%, 
+        rgba(10, 11, 13, 0.8) 70%,
+        var(--obsidian-black) 100%);
+      z-index: 1;
+    }
+
+    .movie-hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 60px;
+    }
+
+    .movie-poster {
+      width: 300px;
+      height: 450px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      margin-right: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-poster:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-info-wrapper {
+      flex: 1;
+    }
+
+    .movie-title-large {
+      font-size: 48px;
+      font-weight: var(--fw-7);
+      color: var(--white);
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .movie-meta {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .movie-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-base);
+      color: var(--off-white);
+    }
+
+    .movie-meta-item ion-icon {
+      font-size: 20px;
+      color: var(--accent-blue);
+    }
+
+    .rating-large {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      padding: 8px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: var(--fw-6);
+      box-shadow: 0 4px 15px var(--accent-blue-glow);
+    }
+
+    .rating-large ion-icon {
+      color: var(--rating-gold);
+    }
+
+    .movie-tagline {
+      font-size: var(--fs-lg);
+      color: var(--accent-blue-light);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .movie-description {
+      font-size: var(--fs-base);
+      line-height: 1.8;
+      color: var(--off-white);
+      margin-bottom: 30px;
+      max-width: 800px;
+    }
+
+    .movie-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-play {
+      background: var(--accent-blue);
+      color: var(--white);
+      padding: 15px 40px;
+      border-radius: 10px;
+      font-size: var(--fs-base);
+      font-weight: var(--fw-6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-play:hover {
+      background: var(--accent-blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--accent-blue-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: var(--fs-base);
+      font-weight: var(--fw-6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .movie-details-section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: var(--fw-7);
+      color: var(--white);
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent-blue);
+      border-radius: 2px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .info-card {
+      background: var(--obsidian-dark);
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.2);
+    }
+
+    .info-card-title {
+      font-size: var(--fs-sm);
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-weight: var(--fw-6);
+    }
+
+    .info-card-content {
+      font-size: var(--fs-base);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    .cast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 25px;
+    }
+
+    .cast-member {
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .cast-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .cast-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid var(--obsidian-dark);
+      transition: all 0.3s ease;
+    }
+
+    .cast-member:hover .cast-photo {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px var(--accent-blue-glow);
+    }
+
+    .cast-name {
+      font-size: var(--fs-base);
+      color: var(--white);
+      font-weight: var(--fw-6);
+      margin-bottom: 5px;
+    }
+
+    .cast-role {
+      font-size: var(--fs-sm);
+      color: var(--accent-blue-light);
+    }
+
+    .trailer-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 15px;
+      overflow: hidden;
+      background: var(--obsidian-dark);
+    }
+
+    .trailer-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .movie-hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .movie-poster {
+        margin-right: 0;
+        margin-bottom: 30px;
+        width: 250px;
+        height: 375px;
+      }
+
+      .movie-title-large {
+        font-size: 32px;
+      }
+
+      .movie-actions {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="">
+      <div class="navbar">
+
+        <button class="navbar-menu-btn">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="three"></span>
+        </button>
+
+        <a href="./index.html" class="navbar-brand">
+          <img src="./assets/images/logo.png" alt="ObsidianTV Logo" class="logo">
+        </a>
+
+        <nav class="">
+          <ul class="navbar-nav">
+            <li> <a href="./index.html" class="navbar-link">Home</a> </li>
+            <li> <a href="./movies.html" class="navbar-link">Movies</a> </li>
+            <li> <a href="" class="navbar-link">TV Shows</a></li>
+            <li> <a href="" class="navbar-link">New & Popular</a></li>
+          </ul>
+        </nav>
+
+        <div class="navbar-actions">
+          <form action="#" class="navbar-form">
+            <input type="text" name="search" placeholder="Search…" class="navbar-form-search">
+            <button class="navbar-form-btn" type="submit">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+            <button class="navbar-form-close" type="button">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+          </form>
+
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+
+          <a href="./login.html" class="navbar-signin">
+            <span>Sign in</span>
+            <ion-icon name="log-in-outline"></ion-icon>
+          </a>
+        </div>
+
+      </div>
+    </header>
+
+    <main>
+      <!-- Movie Hero Section -->
+      <section class="movie-hero">
+        <img src="./assets/images/images.jpg" class="movie-hero-bg" alt="Top Gun: Maverick">
+        
+        <div class="movie-hero-content">
+          <div style="max-width: var(--container); width: 100%; margin: 0 auto; padding: 0 var(--px); display: flex; align-items: flex-end;">
+            <img src="./assets/images/movies/top.png" class="movie-poster" alt="Top Gun: Maverick Poster">
+            
+            <div class="movie-info-wrapper">
+              <h1 class="movie-title-large">Top Gun: Maverick</h1>
+              
+              <p class="movie-tagline">"Feel the need... the need for speed."</p>
+              
+              <div class="movie-meta">
+                <div class="movie-meta-item">
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  <span>2022</span>
+                </div>
+                <div class="movie-meta-item">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <span>2h 10m</span>
+                </div>
+                <div class="movie-meta-item">
+                  <ion-icon name="film-outline"></ion-icon>
+                  <span>Action, Drama</span>
+                </div>
+                <div class="rating-large">
+                  <ion-icon name="star"></ion-icon>
+                  <span>8.3</span>
+                </div>
+              </div>
+              
+              <p class="movie-description">
+                After more than thirty years of service as one of the Navy's top aviators, Pete "Maverick" Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. When he finds himself training a detachment of Top Gun graduates for a specialized mission, Maverick meets Lt. Bradley Bradshaw, the son of his late friend and Radar Intercept Officer Nick "Goose" Bradshaw.
+              </p>
+              
+              <div class="movie-actions">
+                <button class="btn-play">
+                  <ion-icon name="play"></ion-icon>
+                  <span>Watch Now</span>
+                </button>
+                <button class="btn-secondary">
+                  <ion-icon name="add-outline"></ion-icon>
+                  <span>My List</span>
+                </button>
+                <button class="btn-secondary">
+                  <ion-icon name="share-social-outline"></ion-icon>
+                  <span>Share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Movie Information Section -->
+      <section class="movie-details-section" style="max-width: var(--container); margin: 0 auto; padding: 0 var(--px);">
+        <h2 class="section-title">Movie Information</h2>
+        
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-card-title">Director</div>
+            <div class="info-card-content">Joseph Kosinski</div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-title">Producers</div>
+            <div class="info-card-content">Tom Cruise, Jerry Bruckheimer, David Ellison</div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-title">Writers</div>
+            <div class="info-card-content">Ehren Kruger, Eric Warren Singer, Christopher McQuarrie</div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-title">Studio</div>
+            <div class="info-card-content">Paramount Pictures</div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-title">Budget</div>
+            <div class="info-card-content">$170 million</div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-card-title">Box Office</div>
+            <div class="info-card-content">$1.496 billion</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cast Section -->
+      <section class="movie-details-section" style="max-width: var(--container); margin: 0 auto; padding: 0 var(--px);">
+        <h2 class="section-title">Cast</h2>
+        
+        <div class="cast-grid">
+          <div class="cast-member">
+            <img src="./assets/images/cast/tom.png" class="cast-photo" alt="Tom Cruise">
+            <div class="cast-name">Tom Cruise</div>
+            <div class="cast-role">Pete "Maverick" Mitchell</div>
+          </div>
+          
+          <div class="cast-member">
+            <img src="https://m.media-amazon.com/images/M/MV5BNWI3YWY1NWQtNDVhMy00ZWE1LWI2MzUtOTczNTg5MTllZmNjXkEyXkFqcGc@._V1_QL75_UX280_CR0,22,280,280_.jpg" class="cast-photo" alt="Miles Teller">
+            <div class="cast-name">Miles Teller</div>
+            <div class="cast-role">Bradley "Rooster" Bradshaw</div>
+          </div>
+          
+          <div class="cast-member">
+            <img src="https://m.media-amazon.com/images/M/MV5BNGMwYmU3MTAtYjcyOC00NGMzLTgzYzItMTc4YzQwNzNhYjRmXkEyXkFqcGc@._V1_QL75_UX280_CR0,24,280,280_.jpg" class="cast-photo" alt="Jennifer Connelly">
+            <div class="cast-name">Jennifer Connelly</div>
+            <div class="cast-role">Penny Benjamin</div>
+          </div>
+          
+          <div class="cast-member">
+            <img src="https://m.media-amazon.com/images/M/MV5BNzg0MzA4MTY5M15BMl5BanBnXkFtZTcwODg2MTIwOQ@@._V1_QL75_UX280_CR0,17,280,280_.jpg" class="cast-photo" alt="Jon Hamm">
+            <div class="cast-name">Jon Hamm</div>
+            <div class="cast-role">Cyclone</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trailer Section -->
+      <section class="movie-details-section" style="max-width: var(--container); margin: 0 auto; padding: 0 var(--px);">
+        <h2 class="section-title">Official Trailer</h2>
+        
+        <div class="trailer-container">
+          <iframe 
+            src="https://www.youtube.com/embed/giXco2jaZ_4" 
+            title="Top Gun: Maverick Trailer" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <!-- Similar Movies Section -->
+      <section class="movie-details-section" style="max-width: var(--container); margin: 0 auto; padding: 0 var(--px);">
+        <h2 class="section-title">You May Also Like</h2>
+        
+        <div class="movies-grid">
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/1917.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>8.3</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">1917</h3>
+              <div class="card-info">
+                <span class="genre">War/Drama</span>
+                <span class="year">2019</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/dark-knight.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>9.0</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">The Dark Knight</h3>
+              <div class="card-info">
+                <span class="genre">Action/Adventure</span>
+                <span class="year">2008</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/gladiator.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>8.5</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Gladiator</h3>
+              <div class="card-info">
+                <span class="genre">Action/Adventure</span>
+                <span class="year">2000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/interstaller.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>8.6</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Interstellar</h3>
+              <div class="card-info">
+                <span class="genre">Sci-fi/Adventure</span>
+                <span class="year">2014</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/saving-private-ryan.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>8.6</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Saving Private Ryan</h3>
+              <div class="card-info">
+                <span class="genre">War/Action</span>
+                <span class="year">1998</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="card-head">
+              <img src="./assets/images/movies/dune.jpg" alt="" class="card-img">
+              <div class="card-overlay">
+                <div class="bookmark">
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
+                <div class="rating">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <span>8.2</span>
+                </div>
+                <div class="play">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Dune</h3>
+              <div class="card-info">
+                <span class="genre">Sci-fi/Adventure</span>
+                <span class="year">2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="./assets/images/logo.png" alt="ObsidianTV Logo" class="footer-logo">
+          <p class="slogan">Movies & TV Shows, Online cinema, OTP.</p>
+
+          <div class="social-link">
+            <a href="#" aria-label="Facebook">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <ion-icon name="logo-youtube"></ion-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <ul>
+            <h4 class="link-heading">ObsidianTV</h4>
+            <li class="link-item"><a href="#">About us</a></li>
+            <li class="link-item"><a href="#">My profile</a></li>
+            <li class="link-item"><a href="#">Pricing plans</a></li>
+            <li class="link-item"><a href="#">Contacts</a></li>
+          </ul>
+
+          <ul>
+            <h4 class="link-heading">Browse</h4>
+            <li class="link-item"><a href="#live">Live Tv</a></li>
+            <li class="link-item"><a href="#">Live News</a></li>
+            <li class="link-item"><a href="#">Live Sports</a></li>
+            <li class="link-item"><a href="./movies.html">Streaming Library</a></li>
+          </ul>
+
+          <ul>
+            <li class="link-item"><a href="#live">TV Shows</a></li>
+            <li class="link-item"><a href="./movies.html">Movies</a></li>
+            <li class="link-item"><a href="#">Kids</a></li>
+            <li class="link-item"><a href="#category">Collections</a></li>
+          </ul>
+
+          <ul>
+            <h4 class="link-heading">Help</h4>
+            <li class="link-item"><a href="#">Account & Billing</a></li>
+            <li class="link-item"><a href="#">Plans & Pricing</a></li>
+            <li class="link-item"><a href="#">Supported devices</a></li>
+            <li class="link-item"><a href="#">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-copyright">
+        <div class="copyright">
+          <p>&copy; copyright 2023 ObsidianTV</p>
+        </div>
+        <div class="wrapper">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms and conditions</a>
+          <a href="#">Legal notice</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="./assets/js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

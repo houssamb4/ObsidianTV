@@ -1,0 +1,570 @@
+/* ==============================================
+   ObsidianTV Design Enhancements
+   ============================================== */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body background gradient */
+body {
+  background: linear-gradient(135deg, var(--obsidian-black) 0%, var(--obsidian-dark) 50%, var(--obsidian-black) 100%);
+}
+
+/* Add active state for navigation links */
+.navbar-link.active {
+  color: var(--accent-blue);
+  position: relative;
+}
+
+.navbar-link.active::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Enhanced button hover effects */
+.load-more {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.load-more::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.load-more:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.load-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--card-shadow), 0 0 40px var(--accent-blue-glow);
+  background: var(--accent-blue);
+}
+
+/* Enhanced movie card animations */
+.movie-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.movie-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 17px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-light));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05) translateZ(0);
+  filter: brightness(1.1);
+}
+
+.movie-card:hover::before {
+  opacity: 1;
+}
+
+.movie-card .card-overlay {
+  transition: all 0.4s ease;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 80%);
+}
+
+.movie-card:hover .card-overlay {
+  opacity: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(33, 150, 243, 0.1) 80%);
+}
+
+/* Enhanced live card animations */
+.live-card {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.live-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-blue);
+}
+
+/* Category card hover effects */
+.category-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border effect */
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-light));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 15;
+}
+
+/* Blue tint overlay */
+.category-card::after {
+  background: linear-gradient(180deg, 
+    transparent 20%, 
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(33, 150, 243, 0.2) 100%) !important;
+  transition: all 0.4s ease;
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-card:hover {
+  transform: scale(1.08) translateY(-5px);
+  filter: brightness(1.15);
+}
+
+.category-card:hover::after {
+  background: linear-gradient(180deg, 
+    rgba(33, 150, 243, 0.15) 0%, 
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(33, 150, 243, 0.35) 100%) !important;
+}
+
+/* Banner enhancements */
+.banner-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.banner-card:hover {
+  border-color: var(--accent-blue);
+}
+
+.banner-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top, 
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+.banner-card .card-content {
+  z-index: 2;
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Banner button hover effects */
+.banner-actions .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-actions .btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.banner-actions .btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Banner text animation on hover */
+.banner-card:hover .card-title {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-blue-glow);
+}
+
+.banner-card:hover .card-description {
+  color: var(--text-white);
+}
+
+/* Enhanced form inputs */
+.navbar-form-search:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-blue-glow), 0 0 20px var(--accent-blue-glow);
+  border-color: var(--accent-blue);
+}
+
+/* Filter dropdown enhancements */
+.filter-dropdowns select {
+  transition: all 0.3s ease;
+}
+
+.filter-dropdowns select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-blue-glow);
+  transform: translateY(-2px);
+}
+
+/* Radio button enhancements */
+.filter-radios label {
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.filter-radios input:checked + label {
+  color: #fff;
+  text-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Play button pulse animation */
+.play {
+  transition: all 0.4s ease;
+}
+
+.movie-card:hover .play {
+  transform: translate(-50%, -50%) scale(1.2);
+  filter: drop-shadow(0 0 20px var(--accent-blue));
+}
+
+.play ion-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Live badge pulse animation */
+.live-badge {
+  animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 59, 92, 0);
+  }
+}
+
+/* Footer link hover effects */
+.footer-links a {
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent-blue);
+  transform: translateX(5px);
+  text-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Social link hover effects */
+.social-link a {
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link a:hover {
+  color: var(--accent-blue);
+  transform: translateY(-3px);
+  text-shadow: 0 0 15px var(--accent-blue);
+}
+
+/* Rating badge enhancement */
+.rating {
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .rating {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.3), rgba(33, 150, 243, 0.2));
+  border: 1px solid var(--accent-blue);
+  backdrop-filter: blur(10px);
+}
+
+/* Bookmark icon hover */
+.bookmark {
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .bookmark {
+  transform: scale(1.15) rotate(-10deg);
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.3), rgba(33, 150, 243, 0.2));
+  border: 1px solid var(--accent-blue);
+}
+
+.bookmark:hover {
+  color: var(--rating-gold);
+  transform: scale(1.3) rotate(0deg);
+  filter: drop-shadow(0 0 8px var(--rating-gold));
+}
+
+/* Search button animations */
+.navbar-search-btn,
+.navbar-form-btn {
+  transition: all 0.3s ease;
+}
+
+.navbar-search-btn:hover,
+.navbar-form-btn:hover {
+  color: var(--accent-blue);
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px var(--accent-blue));
+}
+
+/* Sign in button enhancement */
+.navbar-signin {
+  transition: all 0.3s ease;
+}
+
+.navbar-signin:hover {
+  color: var(--accent-blue);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Section heading enhancement */
+.section-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent-blue-glow);
+}
+
+/* Improved focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--accent-blue-glow);
+}
+
+/* Loading state for load more button */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Card title enhancement */
+.card-title {
+  transition: color 0.3s ease;
+}
+
+.movie-card:hover .card-title,
+.live-card:hover .card-title {
+  color: var(--accent-blue);
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+
+/* Card info enhancement */
+.movie-card .card-info {
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .card-info {
+  color: var(--accent-blue-light);
+  transform: translateX(3px);
+}
+
+.movie-card:hover .genre {
+  filter: brightness(1.3);
+}
+
+/* Card body enhancement */
+.movie-card .card-body {
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .card-body {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* Enhanced scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--rich-black-fogra-30);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--oxford-blue);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Additional ObsidianTV Enhancements */
+
+/* Navbar gradient on scroll */
+.navbar {
+  background: linear-gradient(135deg, var(--obsidian-black), var(--obsidian-dark));
+}
+
+/* Rating badge with gold glow */
+.rating {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1));
+  border: 1px solid var(--rating-gold);
+  backdrop-filter: blur(10px);
+}
+
+
+/* Live badge enhancement */
+.live-badge {
+  background: linear-gradient(135deg, var(--live-indicator), hsl(350, 90%, 50%));
+  box-shadow: 0 0 20px var(--live-indicator-shadow);
+}
+
+/* Quality badge enhancement */
+.quality {
+  background: var(--accent-blue);
+  box-shadow: 0 0 15px var(--accent-blue-glow);
+}
+
+/* Card overlay enhanced gradient */
+.card-overlay {
+  background: linear-gradient(to top, 
+    var(--obsidian-black) 0%, 
+    transparent 50%);
+}
+
+/* Category name with glow effect */
+.category-card .name {
+  transition: all 0.3s ease;
+  font-weight: var(--fw-6);
+}
+
+.category-card:hover .name {
+  color: var(--accent-blue);
+  text-shadow: 0 0 20px var(--accent-blue), 0 0 30px var(--accent-blue-glow);
+  transform: translateX(5px) scale(1.05);
+  letter-spacing: 1px;
+}
+
+/* Category total badge enhancement */
+.category-card .total {
+  transition: all 0.3s ease;
+}
+
+.category-card:hover .total {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+  transform: translateX(-5px) scale(1.15);
+  box-shadow: 0 0 15px var(--accent-blue-glow);
+  color: var(--white);
+}
+
+/* Footer gradient background */
+footer {
+  background: linear-gradient(180deg, 
+    var(--obsidian-dark) 0%, 
+    var(--obsidian-black) 100%);
+  border-top: 1px solid hsla(210, 90%, 58%, 0.1);
+}
+
+/* Load more button gradient */
+.load-more {
+  background: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+  box-shadow: 0 4px 15px var(--accent-blue-glow);
+}
+
+/* Genre and year filter active state */
+.filter-radios .checked-radio-bg {
+  background: var(--accent-blue);
+  box-shadow: 0 0 15px var(--accent-blue-glow);
+}
+
+/* Movie card bookmark active state */
+.bookmark.active {
+  color: var(--accent-blue);
+  filter: drop-shadow(0 0 10px var(--accent-blue));
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

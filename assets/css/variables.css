@@ -1,0 +1,54 @@
+:root {
+  /* Primary Background Colors - Deep Obsidian Theme */
+  --obsidian-black:        hsl(240, 15%, 8%);
+  --obsidian-dark:         hsl(240, 12%, 12%);
+  --obsidian-darker:       hsl(240, 10%, 15%);
+  
+  /* Accent Colors - Beautiful Blue */
+  --accent-blue:           hsl(210, 90%, 58%);
+  --accent-blue-light:     hsl(210, 90%, 65%);
+  --accent-blue-dark:      hsl(210, 85%, 50%);
+  --accent-blue-glow:      hsla(210, 90%, 58%, 0.5);
+  
+  /* Status & Interactive Colors */
+  --live-indicator:        hsl(350, 85%, 60%);
+  --live-indicator-shadow: hsla(350, 85%, 60%, 0.5);
+  --rating-gold:           hsl(45, 95%, 58%);
+  --success-green:         hsl(150, 70%, 55%);
+  
+  /* Text Colors */
+  --text-white:            hsl(0, 0%, 100%);
+  --text-light:            hsl(240, 10%, 85%);
+  --text-muted:            hsl(240, 8%, 65%);
+  
+  /* Overlay & Shadow */
+  --overlay-dark:          hsla(240, 15%, 8%, 0.85);
+  --card-shadow:           hsla(210, 90%, 58%, 0.15);
+  
+  /* Legacy compatibility (mapped to new colors) */
+  --rich-black-fogra-30:   var(--obsidian-darker);
+  --rich-black-fogra-29:   var(--obsidian-dark);
+  --oxford-blue-50:        var(--overlay-dark);
+  --oxford-blue:           var(--obsidian-darker);
+  --light-azure:           var(--accent-blue);
+  --off-white:             var(--text-light);
+  --yellow:                var(--rating-gold);
+  --white:                 var(--text-white);
+  --azure:                 var(--accent-blue);
+  --electric-purple:       var(--accent-blue);
+  --deep-purple:           var(--accent-blue-dark);
+  --cyber-cyan:            var(--accent-blue-light);
+  --neon-blue:             var(--accent-blue);
+  
+  /* Typography */
+  --ff-inter: "Inter", sans-serif;
+  --section-heading: 40px;
+  --fs-lg:           22px;
+  --fs-md:           17px;
+  --fs-sm:           14px;
+  --fs-x-sm:         12px;
+  --fw-7: 700;
+  --fw-6: 600;
+  --fw-5: 500;
+  --px: 120px; 
+}
