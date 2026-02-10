@@ -4,7 +4,7 @@
   Designed to work seamlessly across all devices and screen sizes.<br />
   Built using **HTML**, **CSS**, and **JavaScript**.
 
-  <a href="https://houssamb4.github.io/obsidiantv/"><strong>➥ Live Demo</strong></a>
+  <a href="https://houssamb4.github.io/ObsidianTV/index.html"><strong>➥ Live Demo</strong></a>
 
 </div>
 <br />
