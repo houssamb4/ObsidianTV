@@ -15,4 +15,4 @@ To run **ObsidianTV** locally, follow these steps:
 
 ### Linux & macOS
 ```bash
-sudo git clone https://github.com/USERNAME/obsidiantv.git
+sudo git clone https://github.com/houssamb4/obsidiantv.git
